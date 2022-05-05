@@ -36,7 +36,7 @@ export class MapComponent implements OnInit {
     // TODO Add type
     public markers = this.objectService.getObjects();
 
-    public zoom = 15;
+    public zoom = 14;
     public center = CITY_CENTER;
     public options = {
         mapTypeId: 'roadmap',
@@ -74,7 +74,8 @@ export class MapComponent implements OnInit {
 
         this.infoWindow.open(markerElem)
 
-        console.log(this.map);
+        //console.log(markerElem);
+        markerElem.marker.icon.url = './assets/check.svg';
     }
 
     public zoomIn() {
