@@ -7,6 +7,7 @@ import { UserComponent } from './user.component';
 import { MapComponent } from './map/map.component';
 import { PageComponent } from './page/page.component';
 import { UserRoutingModule } from './user-routing.module';
+import { ObjectService } from '../../services/object.service';
 
 // Other
 import { GoogleMapsModule } from '@angular/google-maps'
@@ -21,6 +22,9 @@ import { GoogleMapsModule } from '@angular/google-maps'
         CommonModule,
         UserRoutingModule,
         GoogleMapsModule
+    ],
+    providers: [
+        ObjectService
     ]
 })
 export class UserModule { }

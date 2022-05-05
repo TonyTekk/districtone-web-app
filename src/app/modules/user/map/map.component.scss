@@ -1,9 +1,41 @@
 .map-buttons {
   position: absolute;
-  top: 80px;
+  top: 138px;
+  left: 8px;
   z-index: 100;
 }
 
-.object-description {
-  max-width: 300px;
+.object-info {
+  padding: 10px 16px 24px 16px;
+
+  &-title {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  &-description {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  &-link {
+    display: block;
+    margin-top: 8px;
+  }
+
+  &-goal {
+    strong {
+      color: #0057FF;
+    }
+  }
+
+  p {
+    margin-top: 8px;
+  }
+}
+
+.object-img {
+  width: 240px;
+  height: 200px;
+  object-fit: cover;
 }

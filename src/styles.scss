@@ -48,7 +48,7 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 8px 0;
+  margin: 0;
 }
 
 p {
@@ -56,4 +56,59 @@ p {
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+//  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: 'Poppins', sans-serif;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+  transition: all .3s ease-out;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
+}
+
+// ------   Map -------
+
+.gm-style-iw-d {
+  overflow: hidden !important;
+  max-width: 240px;
+}
+
+.gm-style-iw {
+  border-radius: 0 !important;
+}
+
+.gm-style .gm-style-iw-t::after {
+  background: none;
+  box-shadow: none;
+}
+
+.gm-style .gm-style-iw-c {
+  padding: 0;
+}
+
+.gm-style {
+
+  button {
+    background-color: white !important;
+    right: 0 !important;
+    top: 0 !important;
+  }
+}

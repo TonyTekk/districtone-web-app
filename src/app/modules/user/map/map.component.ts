@@ -8,70 +8,17 @@ const SVG_Marker = {
     anchor: new google.maps.Point(15, 30),
 };
 
-const TEST_MARKERS = [
-    {
-        position: {
-            lat: 51.673858,
-            lng: 7.815982,
-        },
-
-        title: 'Школа Title',
-        label: '',
-        description: 'Благодійна волонтерська організація, яка займається відновленням Києва, Київської Області та інших областей України після деокупації.',
-        image: 'https://images.1plus1.ua/uploads/articles/000/891/361/39c2b746fbcbedc7f200926ba0f56484_720x530.jpg?v=1647855541',
-
-        draggable: true,
-
-        options: {
-            draggable: false,
-            icon: {
-                url:  './assets/school.svg',
-                scaledSize: new google.maps.Size(50, 50), // scaled size
-                origin: new google.maps.Point(0,0), // origin
-                anchor: new google.maps.Point(0, 0) // anchor
-            },
-            //icon: SVG_Marker
-        },
-        data: {
-            text: 'text'
-        }
-    },
-    {
-        position: {
-            lat: 51.623238,
-            lng: 7.815912,
-        },
-
-        title: 'Садик Title',
-        label: '',
-        description: 'Благодійна волонтерська організація, яка займається відновленням Києва, Київської Області та інших областей України після деокупації.',
-        image: 'https://images.1plus1.ua/uploads/articles/000/891/361/39c2b746fbcbedc7f200926ba0f56484_720x530.jpg?v=1647855541',
-
-        draggable: true,
-
-        options: {
-            draggable: false,
-            icon: {
-                url: './assets/house.svg',
-                scaledSize: new google.maps.Size(50, 50), // scaled size
-                origin: new google.maps.Point(0,0), // origin
-                anchor: new google.maps.Point(0, 0) // anchor
-            },
-        },
-        data: {
-            text: 'text'
-        }
-    },
-]
-
 const CITY_CENTER = {
-    lat: 51.673858,
-    lng: 7.835982,
+    lat: 50.57743527945256,
+    lng: 30.24427711473898,
 };
 
 // Angular
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps';
+
+// App
+import { ObjectService } from '../../../services/object.service';
 
 @Component({
     selector: 'app-map',
@@ -81,27 +28,30 @@ import { MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps';
 export class MapComponent implements OnInit {
     @ViewChild(MapInfoWindow, { static: false }) infoWindow: any;
 
-    constructor() { }
+    constructor(
+        public objectService: ObjectService,
+    ) { }
 
     // TODO Add type
-    public markers = TEST_MARKERS
+    public markers = this.objectService.getObjects();
 
-    public zoom = 13;
+    public zoom = 15;
     public center = CITY_CENTER;
     public options = {
         mapTypeId: 'roadmap',
         zoomControl: false,
         scrollwheel: false,
         disableDoubleClickZoom: true,
-        maxZoom: 15,
-        minZoom: 8,
+        maxZoom: 150,
+        minZoom: 1,
     }
 
     // TODO Add type
     public object = {
         title: '',
         description: '',
-        image: ''
+        image: '',
+        goal: 0,
     }
 
     public ngOnInit() {
@@ -110,7 +60,7 @@ export class MapComponent implements OnInit {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude,
             }
-        })
+        });
     }
 
     public openInfo(markerElem: any, data: any) {
@@ -118,6 +68,7 @@ export class MapComponent implements OnInit {
         this.object.title = data.title;
         this.object.description = data.description;
         this.object.image = data.image;
+        this.object.goal = data.goal;
 
         this.infoWindow.open(markerElem)
     }
