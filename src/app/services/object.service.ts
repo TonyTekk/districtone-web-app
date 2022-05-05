@@ -5,7 +5,7 @@ const TEST_MARKERS = [
             lng:  30.252368464097035
         },
 
-        title: 'Школа Title',
+        title: 'Школа N12',
         label: '',
         description: 'Благодійна волонтерська організація, яка займається відновленням Києва, Київської Області та інших областей України після деокупації.',
         image: 'https://images.1plus1.ua/uploads/articles/000/891/361/39c2b746fbcbedc7f200926ba0f56484_720x530.jpg?v=1647855541',
@@ -33,7 +33,7 @@ const TEST_MARKERS = [
             lng: 30.24185312400303,
         },
 
-        title: 'Садик Title',
+        title: 'Садик',
         label: '',
         description: 'Благодійна волонтерська організація, яка займається відновленням Києва, Київської Області та інших областей України після деокупації.',
         image: 'https://mrpl.city/uploads/news/968x504/pymuny74rqepnlds.jpg',

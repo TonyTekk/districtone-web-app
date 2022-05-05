@@ -9,6 +9,10 @@ import { PageComponent } from './page/page.component';
 import { UserRoutingModule } from './user-routing.module';
 import { ObjectService } from '../../services/object.service';
 
+// Material
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+
 // Other
 import { GoogleMapsModule } from '@angular/google-maps'
 
@@ -21,7 +25,10 @@ import { GoogleMapsModule } from '@angular/google-maps'
     imports: [
         CommonModule,
         UserRoutingModule,
-        GoogleMapsModule
+        GoogleMapsModule,
+        // Material
+        MatButtonModule,
+        MatIconModule,
     ],
     providers: [
         ObjectService

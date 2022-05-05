@@ -26,6 +26,7 @@ import { ObjectService } from '../../../services/object.service';
     styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit {
+    @ViewChild(GoogleMap, { static: false }) map: any;
     @ViewChild(MapInfoWindow, { static: false }) infoWindow: any;
 
     constructor(
@@ -55,6 +56,7 @@ export class MapComponent implements OnInit {
     }
 
     public ngOnInit() {
+        // TODO
         navigator.geolocation.getCurrentPosition((position) => {
             this.center = {
                 lat: position.coords.latitude,
@@ -71,6 +73,8 @@ export class MapComponent implements OnInit {
         this.object.goal = data.goal;
 
         this.infoWindow.open(markerElem)
+
+        console.log(this.map);
     }
 
     public zoomIn() {

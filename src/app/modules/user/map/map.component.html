@@ -1,4 +1,5 @@
 <google-map
+        #map="googleMap"
         height="100%"
         width="100%"
         [zoom]="zoom"
@@ -12,6 +13,7 @@
             [label]="marker.label"
             [title]="marker.title"
             [options]="marker.options"
+
             (mapClick)="openInfo(markerElem, marker)">
     </map-marker>
 
@@ -19,7 +21,9 @@
         <img class="object-img" src="{{object.image}}">
         <div class="object-info">
             <h3 class="object-info-title">{{object.title}}</h3>
+            <!--
             <p class="object-info-description">{{object.description}} </p>
+            -->
             <p class="object-info-goal">Потрібно: <strong>{{object.goal}}</strong></p>
             <a class="object-info-link" href="#"><img src="../../../../assets/arrow.svg"></a>
         </div>
@@ -27,6 +31,10 @@
 </google-map>
 
 <div class="map-buttons">
-    <button (click)="zoomIn()">Zoom in</button>
-    <button (click)="zoomOut()">Zoom out</button>
+    <button mat-flat-button  aria-label="Zoom in" (click)="zoomIn()">
+        <mat-icon>zoom_in</mat-icon>
+    </button>
+    <button mat-flat-button  aria-label="Zoom out" (click)="zoomOut()">
+        <mat-icon>zoom_out</mat-icon>
+    </button>
 </div>

@@ -1,8 +1,12 @@
 .map-buttons {
   position: absolute;
-  top: 138px;
-  left: 8px;
+  top: 148px;
+  right: 8px;
   z-index: 100;
+
+  button {
+    margin: 0 8px;
+  }
 }
 
 .object-info {
@@ -24,6 +28,9 @@
   }
 
   &-goal {
+    font-size: 12px;
+    line-height: 18px;
+
     strong {
       color: #0057FF;
     }
