@@ -17,14 +17,16 @@
     </map-marker>
 
     <map-info-window #infoWindow="mapInfoWindow">
-        <img class="map-object-img" src="{{object.image}}">
+        <img class="map-object-img" src="{{objectInfo.image}}">
         <div class="map-object-info">
-            <h3 class="map-object-info-title">{{object.title}}</h3>
+            <h3 class="map-object-info-title">{{objectInfo.title}}</h3>
             <!--
-            <p class="object-info-description">{{object.description}} </p>
+            <p class="object-info-description">{{objectInfo.description}} </p>
             -->
-            <p class="map-object-info-goal">Потрібно: <strong>{{object.goal}}</strong></p>
-            <a class="map-object-info-link" href="#"><img src="../../../../assets/arrow.svg"></a>
+            <p class="map-object-info-goal">Потрібно: <strong>{{objectInfo.goal}}</strong></p>
+            <a class="map-object-info-link" [routerLink]="['/user/page/' + objectInfo.id]">
+                <img src="../../../../assets/arrow.svg">
+            </a>
         </div>
     </map-info-window>
 </google-map>

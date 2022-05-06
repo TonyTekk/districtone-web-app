@@ -1,9 +1,10 @@
 // Angular
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps';
+import { Router } from '@angular/router';
 
 // App
-import { ObjectService } from '../../../services/object.service';
+import { ObjectService, MarkersInfoModel } from '../../../services/object.service';
 
 // TODO remove to service
 const CITY_CENTER = {
@@ -32,6 +33,7 @@ export class MapComponent implements OnInit {
 
     constructor(
         public objectService: ObjectService,
+        private router: Router,
     ) { }
 
     // TODO Add call to backend
@@ -41,13 +43,8 @@ export class MapComponent implements OnInit {
     public center = CITY_CENTER;
     public options = MAP_OPTIONS;
 
-    // TODO Add type
-    public object = {
-        title: '',
-        description: '',
-        image: '',
-        goal: 0,
-    }
+    // TODO create model
+    public objectInfo = new MarkersInfoModel({});
 
     public ngOnInit() {
         // TODO
@@ -59,25 +56,20 @@ export class MapComponent implements OnInit {
         });
     }
 
-    public openInfo(markerElem: any, data: any) {
-        console.log('Info: ', data);
-
-        this.object.title = data.title;
-        this.object.description = data.description;
-        this.object.image = data.image;
-        this.object.goal = data.goal;
-
+    public openInfo(markerElem: any, data: any): void {
+        // console.log('Info: ', data);
+        this.objectInfo = new MarkersInfoModel(data);
         this.infoWindow.open(markerElem)
 
-        //console.log(markerElem);
-        //markerElem.marker.icon.url = './assets/check.svg';
+        // console.log(markerElem);
+        // markerElem.marker.icon.url = './assets/check.svg';
     }
 
-    public zoomIn() {
+    public zoomIn(): void {
         if (this.zoom < this.options.maxZoom) this.zoom++
     }
 
-    public zoomOut() {
+    public zoomOut(): void {
         if (this.zoom > this.options.minZoom) this.zoom--
     }
 }

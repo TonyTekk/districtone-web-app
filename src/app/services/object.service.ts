@@ -10,6 +10,7 @@ const SVG_Marker = {
 
 const TEST_MARKERS = [
     {
+        id: '1',
         position: {
             lat: 50.57760872346211,
             lng:  30.252368464097035
@@ -38,6 +39,7 @@ const TEST_MARKERS = [
         }
     },
     {
+        id: '2',
         position: {
             lat: 50.58153272348597,
             lng: 30.24185312400303,
@@ -69,12 +71,45 @@ const TEST_MARKERS = [
 // Angular
 import { Injectable } from '@angular/core';
 
+// Types
+export type ObjectType = 'home' | 'school';
+
+export class MarkersInfoModel {
+    public id: string | null;
+    public title: string;
+    public description: string;
+    public image: string;
+    public goal: number | null;
+
+    public constructor(item: any) {
+        item.id ? this.id = item.id : this.id = null;
+        item.title ? this.title = item.title : this.title = 'No title';
+        item.description ? this.description = item.description : this.description = 'No description';
+        item.image ? this.image = item.image : this.image = './assets/no_image.png';
+        item.goal ? this.goal = item.goal : this.goal = null;
+
+        switch (item.type) {
+            case 'home':
+                // this.icon = '';
+                break;
+
+            case 'school':
+                // this.icon = '';
+                break;
+
+            default:
+                // this.icon = '';
+                break;
+        }
+
+    }
+}
+
 @Injectable()
 export class ObjectService {
     public constructor() { }
 
-    // TODO Add type
-    public getObjects(): any [] {
+    public getObjects(): any[]  {
         return TEST_MARKERS;
     }
 }
