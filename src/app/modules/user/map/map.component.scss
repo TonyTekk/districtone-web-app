@@ -1,48 +1,50 @@
-.map-buttons {
-  position: absolute;
-  top: 148px;
-  right: 8px;
-  z-index: 100;
-
-  button {
-    margin: 0 8px;
-  }
-}
-
-.object-info {
-  padding: 10px 16px 24px 16px;
-
-  &-title {
-    font-size: 16px;
-    line-height: 24px;
+.map {
+  &-object-img {
+    width: 240px;
+    height: 200px;
+    object-fit: cover;
   }
 
-  &-description {
-    font-size: 12px;
-    line-height: 18px;
-  }
+  &-object-info {
+    padding: 10px 16px 24px 16px;
 
-  &-link {
-    display: block;
-    margin-top: 8px;
-  }
+    &-title {
+      font-size: 16px;
+      line-height: 24px;
+    }
 
-  &-goal {
-    font-size: 12px;
-    line-height: 18px;
+    &-description {
+      font-size: 12px;
+      line-height: 18px;
+    }
 
-    strong {
-      color: #0057FF;
+    &-link {
+      display: block;
+      margin-top: 8px;
+    }
+
+    &-goal {
+      font-size: 12px;
+      line-height: 18px;
+
+      strong {
+        color: #0057FF;
+      }
+    }
+
+    p {
+      margin-top: 8px;
     }
   }
 
-  p {
-    margin-top: 8px;
-  }
-}
+  &-buttons {
+    position: absolute;
+    top: 148px;
+    right: 8px;
+    z-index: 100;
 
-.object-img {
-  width: 240px;
-  height: 200px;
-  object-fit: cover;
+    button {
+      margin: 0 8px;
+    }
+  }
 }
