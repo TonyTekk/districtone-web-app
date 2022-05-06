@@ -11,10 +11,7 @@ const SVG_Marker = {
 const TEST_MARKERS = [
     {
         id: '1',
-        position: {
-            lat: 50.57760872346211,
-            lng:  30.252368464097035
-        },
+        position: { lat: 50.57760872346211, lng:  30.252368464097035 },
 
         title: 'Школа N12',
         label: '',
@@ -22,10 +19,7 @@ const TEST_MARKERS = [
         image: 'https://images.1plus1.ua/uploads/articles/000/891/361/39c2b746fbcbedc7f200926ba0f56484_720x530.jpg?v=1647855541',
         goal: '80000',
 
-        draggable: true,
-
         options: {
-            draggable: false,
             icon: {
                 url:  './assets/school.svg',
                 scaledSize: new google.maps.Size(50, 50), // scaled size
@@ -34,16 +28,10 @@ const TEST_MARKERS = [
             },
             //icon: SVG_Marker
         },
-        data: {
-            text: 'text'
-        }
     },
     {
         id: '2',
-        position: {
-            lat: 50.58153272348597,
-            lng: 30.24185312400303,
-        },
+        position: { lat: 50.58153272348597, lng: 30.24185312400303 },
 
         title: 'Садик',
         label: '',
@@ -51,10 +39,7 @@ const TEST_MARKERS = [
         image: 'https://mrpl.city/uploads/news/968x504/pymuny74rqepnlds.jpg',
         goal: '240000',
 
-        draggable: true,
-
         options: {
-            draggable: false,
             icon: {
                 url: './assets/house.svg',
                 scaledSize: new google.maps.Size(50, 50), // scaled size
@@ -62,9 +47,6 @@ const TEST_MARKERS = [
                 anchor: new google.maps.Point(0, 0) // anchor
             },
         },
-        data: {
-            text: 'text'
-        }
     },
 ]
 
@@ -87,21 +69,6 @@ export class MarkersInfoModel {
         item.description ? this.description = item.description : this.description = 'No description';
         item.image ? this.image = item.image : this.image = './assets/no_image.png';
         item.goal ? this.goal = item.goal : this.goal = null;
-
-        switch (item.type) {
-            case 'home':
-                // this.icon = '';
-                break;
-
-            case 'school':
-                // this.icon = '';
-                break;
-
-            default:
-                // this.icon = '';
-                break;
-        }
-
     }
 }
 
