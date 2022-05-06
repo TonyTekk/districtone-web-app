@@ -57,6 +57,13 @@ export class MapComponent implements OnInit {
     }
 
     public openInfo(markerElem: any, data: any): void {
+        // TODO focus on map center
+        console.log(this.map.getCenter().lat(), this.map.getCenter().lng());
+        this.center = {
+            lat: this.map.getCenter().lat(),
+            lng: this.map.getCenter().lng(),
+        }
+
         // console.log('Info: ', data);
         this.objectInfo = new MarkersInfoModel(data);
         this.infoWindow.open(markerElem)
