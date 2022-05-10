@@ -1,1 +1,84 @@
-<p>page works!</p>
+<div class="page" *ngIf="object">
+    <img class="page-cover" src="{{object.preview}}" alt="{{object.title}}">
+
+    <h1 class="page-title">{{object.title}}</h1>
+    <p class="page-description">{{object.description}}</p>
+
+    <div class="page-checkpoints">
+        <div class="__ready-now">
+            <h3>Вже зроблено</h3>
+
+            <p><strong class="__count">1.</strong>Садочок та територія повністю прибрані від сміття</p>
+            <p><strong class="__count">2.</strong>Вікна садочку закриті плівкою - 15.000 грн</p>
+            <p><strong class="__count">3.</strong>Всі меблі, які ще не зазнали руйнування від води перенесено до сухого місця</p>
+            <p><strong class="__count">4.</strong>Дах відчищено від гарі та знято згорілу кришу</p>
+            <p><strong class="__count">5.</strong>Дах герметизовано рубіроїдом - 100.000 грн</p>
+        </div>
+        <div class="__need-to">
+            <h3>Потрібно зробити</h3>
+
+            <p><strong class="__count">1.</strong>Заміна всіх вікон садочку - 2 млн грн</p>
+            <p><strong class="__count">2.</strong>Відновлення даху - 1.5 млн грн</p>
+            <p><strong class="__count">3.</strong>Відновлення та покращення вуличної частини садочка - 1 млн грн</p>
+            <p><strong class="__count">4.</strong>Відновлення фасаду та внутрішні роботи (вкл. заміну електропроводки та системи опалення) - 3.5 млн грн</p>
+        </div>
+    </div>
+
+    <div class="page-donate">
+        <!-- Card -->
+        <p>
+            UAH
+            Поповнення картки гривни:
+            4149510065533632
+            ОДЕРЖУВАЧ:
+            ТІТАРЕНКО АНДРІЙ БОРИСОВИЧ
+        </p>
+        <p>
+            USD
+            For receiving SWIFT in US dollars
+            5375418801461757
+            BENEFICIARY: TITARENKO ANDRII
+            IBAN: UA403220010000026206302801148
+            ACCOUNT: 26206302801148
+            Beneficiary bank: JSC UNIVERSAL BANK
+            SWIFT CODE: UNJSUAUKXXX
+        </p>
+        <p>
+
+            EUR
+            For receiving SWIFT in euros
+            5375419900745363
+            BENEFICIARY: TITARENKO ANDRII
+            IBAN: UA843220010000026208302719487
+            ACCOUNT:
+            BANK OF BENEFICIARY: JSC UNIVERSAL BANK
+            SWIFT CODE: UNJSUAUKXXX
+        </p>
+        <!-- WEB -->
+        <p>
+            Paypal
+            rayonnomer1@gmail.com
+        </p>
+        <p>
+            Patreon
+            https://www.patreon.com/rayonnomer1
+        </p>
+        <!-- Cripto -->
+        <p>
+            USDT (TRC20)
+            TTauJ77LLH15Vh5LUpy6vRE3xdANM2KXs
+        </p>
+        <p>
+            ETH
+            0x480d2c79c35394bcee6736ca285afd3c27a43e7d
+        </p>
+        <p>
+            BTC
+            1AkV2qzybuWTdHsHMBZSKTt7y1eLQxFUtr
+        </p>
+        <p>
+            BNB
+            0x480d2c79c35394bcee6736ca285afd3c27a43e7d
+        </p>
+    </div>
+</div>

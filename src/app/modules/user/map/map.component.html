@@ -17,7 +17,7 @@
     </map-marker>
 
     <map-info-window class="map-object" #infoWindow="mapInfoWindow" [routerLink]="['/user/page/' + objectInfo.id]">
-        <img class="map-object-img" src="{{objectInfo.image}}">
+        <img class="map-object-img" src="{{objectInfo.preview}}">
         <div class="map-object-info">
             <h3 class="map-object-info-title">{{objectInfo.title}}</h3>
             <!-- <p class="object-info-description">{{objectInfo.description}} </p> -->

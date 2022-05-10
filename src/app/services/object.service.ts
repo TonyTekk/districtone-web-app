@@ -1,52 +1,23 @@
-const SVG_Marker = {
-    path: "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
-    fillColor: "blue",
-    fillOpacity: 1,
-    strokeWeight: 0,
-    rotation: 0,
-    scale: 2,
-    anchor: new google.maps.Point(15, 30),
-};
-
 const TEST_MARKERS = [
     {
         id: '1',
-        position: { lat: 50.57760872346211, lng:  30.252368464097035 },
-
-        title: 'Школа N12',
+        position: { lat: 50.5660536, lng:  30.2657559 },
+        title: 'Дитячий садок 17 "Веселка"',
         label: '',
-        description: 'Благодійна волонтерська організація, яка займається відновленням Києва, Київської Області та інших областей України після деокупації.',
-        image: 'https://images.1plus1.ua/uploads/articles/000/891/361/39c2b746fbcbedc7f200926ba0f56484_720x530.jpg?v=1647855541',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        preview: './assets/test/test_1.jpg',
         goal: '80000',
-
-        options: {
-            icon: {
-                url:  './assets/school.svg',
-                scaledSize: new google.maps.Size(50, 50), // scaled size
-                origin: new google.maps.Point(0,0), // origin
-                anchor: new google.maps.Point(0, 0) // anchor
-            },
-            //icon: SVG_Marker
-        },
+        icon: './assets/house.svg',
     },
     {
         id: '2',
         position: { lat: 50.58153272348597, lng: 30.24185312400303 },
-
         title: 'Садик',
         label: '',
         description: 'Благодійна волонтерська організація, яка займається відновленням Києва, Київської Області та інших областей України після деокупації.',
-        image: 'https://mrpl.city/uploads/news/968x504/pymuny74rqepnlds.jpg',
+        preview: '',
         goal: '240000',
-
-        options: {
-            icon: {
-                url: './assets/house.svg',
-                scaledSize: new google.maps.Size(50, 50), // scaled size
-                origin: new google.maps.Point(0,0), // origin
-                anchor: new google.maps.Point(0, 0) // anchor
-            },
-        },
+        icon: './assets/school.svg',
     },
 ]
 
@@ -56,18 +27,66 @@ import { Injectable } from '@angular/core';
 // Types
 export type ObjectType = 'home' | 'school';
 
+export class MarkerModel {
+    public id: string | null;
+    // Add type
+    public position: any | null;
+    // General info
+    public title: string;
+    public label: string;
+    public description: string;
+    public preview: string;
+    public goal: number | null;
+
+    // Options
+    public options: any;
+
+    public constructor(item: any) {
+        item.id ? this.id = item.id : this.id = null;
+        item.position ? this.position = item.position: this.position = null;
+
+        // General info
+        item.title ? this.title = item.title : this.title = 'No title';
+        item.label ? this.label = item.label: this.label = '';
+        item.description ? this.description = item.description : this.description = 'No description';
+        item.preview && item.prev !== '' ? this.preview = item.preview : this.preview = './assets/no_image.png';
+        item.goal ? this.goal = item.goal : this.goal = null;
+
+        // Options
+        if (item.icon) {
+            this.options = {
+                icon: {
+                    url: item.icon,
+                    scaledSize: new google.maps.Size(50, 50), // scaled size
+                    origin: new google.maps.Point(0,0), // origin
+                    anchor: new google.maps.Point(0, 0) // anchor
+                }
+            }
+        } else {
+            this.options = {
+                icon: {
+                    url:  './assets/house.svg',
+                    scaledSize: new google.maps.Size(50, 50), // scaled size
+                    origin: new google.maps.Point(0,0), // origin
+                    anchor: new google.maps.Point(0, 0) // anchor
+                }
+            }
+        }
+    }
+}
+
 export class MarkersInfoModel {
     public id: string | null;
     public title: string;
     public description: string;
-    public image: string;
+    public preview: string;
     public goal: number | null;
 
     public constructor(item: any) {
         item.id ? this.id = item.id : this.id = null;
         item.title ? this.title = item.title : this.title = 'No title';
         item.description ? this.description = item.description : this.description = 'No description';
-        item.image ? this.image = item.image : this.image = './assets/no_image.png';
+        item.preview && item.prev !== ''  ? this.preview = item.preview : this.preview = './assets/no_image.png';
         item.goal ? this.goal = item.goal : this.goal = null;
     }
 }
@@ -76,7 +95,17 @@ export class MarkersInfoModel {
 export class ObjectService {
     public constructor() { }
 
-    public getObjects(): any[]  {
-        return TEST_MARKERS;
+    public getObjects(): MarkerModel[]  {
+        const result:any[] = [];
+
+        TEST_MARKERS.forEach((item) => {
+            result.push(new MarkerModel(item));
+        });
+
+        return result;
+    }
+
+    public getObjectById(id: any): any {
+        return TEST_MARKERS[0];
     }
 }

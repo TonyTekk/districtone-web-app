@@ -4,13 +4,10 @@ import { MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps';
 import { Router } from '@angular/router';
 
 // App
-import { ObjectService, MarkersInfoModel } from '../../../services/object.service';
+import { ObjectService, MarkerModel, MarkersInfoModel } from '../../../services/object.service';
 
 // TODO remove to service
-const CITY_CENTER = {
-    lat: 50.57743527945256,
-    lng: 30.24427711473898,
-};
+const CITY_CENTER = { lat: 50.57743527945256, lng: 30.24427711473898 };
 
 //TODO remove to options
 const MAP_OPTIONS = {
@@ -32,18 +29,18 @@ export class MapComponent implements OnInit {
     @ViewChild(MapInfoWindow, { static: false }) infoWindow: any;
 
     constructor(
-        public objectService: ObjectService,
         private router: Router,
+        public objectService: ObjectService,
     ) { }
 
-    // TODO Add call to backend
-    public markers = this.objectService.getObjects();
-
+    // Map
     public zoom = 14;
     public center = CITY_CENTER;
     public options = MAP_OPTIONS;
 
-    // TODO create model
+    // Markers
+    // TODO Add call to backend
+    public markers: MarkerModel[] = this.objectService.getObjects();
     public objectInfo = new MarkersInfoModel({});
 
     public ngOnInit() {
@@ -71,6 +68,10 @@ export class MapComponent implements OnInit {
         // console.log(markerElem);
         // markerElem.marker.icon.url = './assets/check.svg';
     }
+
+    // TODO
+    public next(): void {}
+    public prev(): void {}
 
     public zoomIn(): void {
         if (this.zoom < this.options.maxZoom) this.zoom++

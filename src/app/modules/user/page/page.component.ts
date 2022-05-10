@@ -6,6 +6,9 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { pipe } from 'rxjs';
 import { first } from 'rxjs/operators';
 
+// App
+import { ObjectService } from '../../../services/object.service';
+
 @Component({
     selector: 'app-page',
     templateUrl: './page.component.html',
@@ -14,9 +17,12 @@ import { first } from 'rxjs/operators';
 export class PageComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
+        public objectService: ObjectService,
     ) { }
 
     public id: string = '';
+    // TODO Add ObjectModel
+    public object: any;
 
     ngOnInit(): void {
         this.route.params.pipe(first()).toPromise()
@@ -25,7 +31,10 @@ export class PageComponent implements OnInit {
 
                 if (params.id && params.id !== '') {
                     this.id = params.id;
-                    console.log('Object Id: ', this.id);
+                    this.object = this.objectService.getObjectById(this.id);
+                    console.log(`Object Id: ${this.id}`, this.object);
+
+
                 } else {
                     console.error('Error! No params found');
                 }
