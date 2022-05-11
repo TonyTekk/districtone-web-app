@@ -1,3 +1,5 @@
+@import '../../../../variables';
+
 .map {
   &-object {
     cursor: pointer;
@@ -32,7 +34,7 @@
       line-height: 18px;
 
       strong {
-        color: #0057FF;
+        color: $c-corp;
       }
     }
 
@@ -49,6 +51,10 @@
 
     button {
       margin: 0 8px;
+    }
+
+    @include media-breakpoint-down(md) {
+      top: 88px;
     }
   }
 }

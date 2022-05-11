@@ -33,6 +33,8 @@ $districtone-web-app-theme: mat.define-light-theme((
 // that you are using.
 @include mat.all-component-themes($districtone-web-app-theme);
 
+@import 'variables';
+
 :host {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 14px;
