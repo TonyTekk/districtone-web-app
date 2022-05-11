@@ -1,5 +1,5 @@
 // Angular
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren, ElementRef } from '@angular/core';
 import { MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps';
 import { Router } from '@angular/router';
 
@@ -29,7 +29,7 @@ const MAP_OPTIONS = {
 export class MapComponent implements OnInit {
     @ViewChild(GoogleMap, { static: false }) map: any;
     @ViewChild(MapInfoWindow, { static: false }) infoWindow: any;
-    
+
     constructor(
         private router: Router,
         public objectService: ObjectService,
@@ -67,20 +67,21 @@ export class MapComponent implements OnInit {
     public next(): void {
         this.currentMarkerPosition < this.markers.length - 1 ? this.currentMarkerPosition++ : this.currentMarkerPosition = 0;
 
+        //console.log(this.markerElem);
         // TODO
         //this.openInfo(this.markerElem, this.markers[this.currentMarkerPosition]);
 
-        this.objectInfo = new MarkersInfoModel(this.markers[this.currentMarkerPosition]);
+        //this.objectInfo = new MarkersInfoModel(this.markers[this.currentMarkerPosition]);
         this.center = this.markers[this.currentMarkerPosition].position;
     }
     public prev(): void {
         this.currentMarkerPosition > 0 ? this.currentMarkerPosition-- : this.currentMarkerPosition = this.markers.length - 1;
-        //this.openInfo(this.markers[this.currentMarkerPosition].position, this.markers[this.currentMarkerPosition].position);
 
+        //console.log(this.markerElem);
         // TODO
         //this.openInfo(this.markerElem, this.markers[this.currentMarkerPosition]);
 
-        this.objectInfo = new MarkersInfoModel(this.markers[this.currentMarkerPosition]);
+        //this.objectInfo = new MarkersInfoModel(this.markers[this.currentMarkerPosition]);
         this.center = this.markers[this.currentMarkerPosition].position;
     }
 
@@ -90,5 +91,9 @@ export class MapComponent implements OnInit {
 
     public zoomOut(): void {
         if (this.zoom > this.options.minZoom) this.zoom--
+    }
+
+    public mapPositionChanged(): void {
+        this.infoWindow.close();
     }
 }
