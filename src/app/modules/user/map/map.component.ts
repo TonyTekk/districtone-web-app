@@ -9,7 +9,6 @@ import { ObjectService, MarkerModel, MarkersInfoModel } from '../../../services/
 // TODO remove to service
 const CITY_CENTER = { lat: 50.57743527945256, lng: 30.24427711473898 };
 
-//TODO remove to options
 const MAP_OPTIONS = {
     mapTypeId: 'roadmap',
     zoomControl: false,
@@ -17,6 +16,9 @@ const MAP_OPTIONS = {
     disableDoubleClickZoom: true,
     maxZoom: 150,
     minZoom: 1,
+    fullscreenControl: false,
+    mapTypeControl: false,
+    streetViewControl: false,
 };
 
 @Component({
@@ -27,7 +29,7 @@ const MAP_OPTIONS = {
 export class MapComponent implements OnInit {
     @ViewChild(GoogleMap, { static: false }) map: any;
     @ViewChild(MapInfoWindow, { static: false }) infoWindow: any;
-
+    
     constructor(
         private router: Router,
         public objectService: ObjectService,
@@ -39,39 +41,48 @@ export class MapComponent implements OnInit {
     public options = MAP_OPTIONS;
 
     // Markers
-    // TODO Add call to backend
-    public markers: MarkerModel[] = this.objectService.getObjects();
+    public currentMarkerPosition: number = 0;
+    public markers: MarkerModel[] = [];
     public objectInfo = new MarkersInfoModel({});
 
     public ngOnInit() {
-        // TODO
-        navigator.geolocation.getCurrentPosition((position) => {
-            this.center = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude,
-            }
-        });
+        this.markers = this.objectService.getObjects();
+        console.log('Markers: ', this.markers);
+        this.center = this.markers[this.currentMarkerPosition].position;
     }
 
-    public openInfo(markerElem: any, data: any): void {
-        // TODO focus on map center
-        console.log(this.map.getCenter().lat(), this.map.getCenter().lng());
-        this.center = {
-            lat: this.map.getCenter().lat(),
-            lng: this.map.getCenter().lng(),
-        }
+    public openInfo(markerMapObject: any, dataModel: any): void {
+        console.log('Marker', dataModel);
+        console.log('Marker info', markerMapObject);
 
-        // console.log('Info: ', data);
-        this.objectInfo = new MarkersInfoModel(data);
-        this.infoWindow.open(markerElem)
+        this.infoWindow.close();
+        this.infoWindow.open(markerMapObject);
+        this.objectInfo = new MarkersInfoModel(dataModel);
+        this.center = dataModel.position;
 
-        // console.log(markerElem);
+        // TODO add current marker visualisation
         // markerElem.marker.icon.url = './assets/check.svg';
     }
 
-    // TODO
-    public next(): void {}
-    public prev(): void {}
+    public next(): void {
+        this.currentMarkerPosition < this.markers.length - 1 ? this.currentMarkerPosition++ : this.currentMarkerPosition = 0;
+
+        // TODO
+        //this.openInfo(this.markerElem, this.markers[this.currentMarkerPosition]);
+
+        this.objectInfo = new MarkersInfoModel(this.markers[this.currentMarkerPosition]);
+        this.center = this.markers[this.currentMarkerPosition].position;
+    }
+    public prev(): void {
+        this.currentMarkerPosition > 0 ? this.currentMarkerPosition-- : this.currentMarkerPosition = this.markers.length - 1;
+        //this.openInfo(this.markers[this.currentMarkerPosition].position, this.markers[this.currentMarkerPosition].position);
+
+        // TODO
+        //this.openInfo(this.markerElem, this.markers[this.currentMarkerPosition]);
+
+        this.objectInfo = new MarkersInfoModel(this.markers[this.currentMarkerPosition]);
+        this.center = this.markers[this.currentMarkerPosition].position;
+    }
 
     public zoomIn(): void {
         if (this.zoom < this.options.maxZoom) this.zoom++
