@@ -20,13 +20,12 @@
   }
 
   .logo {
+    display: block;
 
     img {
       width: 170px;
-    }
 
-    @include media-breakpoint-down(md) {
-      img {
+      @include media-breakpoint-down(md) {
         width: 70px;
       }
     }

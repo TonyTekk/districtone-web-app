@@ -29,11 +29,20 @@
     </map-info-window>
 </google-map>
 
-<div class="map-buttons">
+<div class="map-buttons-zoom">
     <button mat-flat-button  aria-label="Zoom in" (click)="zoomIn()">
         <mat-icon>zoom_in</mat-icon>
     </button>
     <button mat-flat-button  aria-label="Zoom out" (click)="zoomOut()">
         <mat-icon>zoom_out</mat-icon>
+    </button>
+</div>
+
+<div class="map-buttons-arrows">
+    <button mat-flat-button  aria-label="Zoom in" (click)="prev()">
+        <mat-icon>arrow_left</mat-icon>
+    </button>
+    <button mat-flat-button  aria-label="Zoom out" (click)="next()">
+        <mat-icon>arrow_right</mat-icon>
     </button>
 </div>
