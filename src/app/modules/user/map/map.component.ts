@@ -47,7 +47,7 @@ export class MapComponent implements OnInit {
 
     public ngOnInit() {
         this.markers = this.objectService.getObjects();
-        console.log('Markers: ', this.markers);
+        // console.log('Markers: ', this.markers);
         this.center = this.markers[this.currentMarkerPosition].position;
     }
 

@@ -1,49 +1,51 @@
-<google-map class="map"
-            #map="googleMap"
-            height="100%"
-            width="100%"
-            [zoom]="zoom"
-            [center]="center"
-            [options]="options"
-            (mapDrag)="mapPositionChanged()">
+<div class="map">
+    <google-map #map="googleMap"
+                height="100%"
+                width="100%"
+                [zoom]="zoom"
+                [center]="center"
+                [options]="options"
+                (mapDrag)="mapPositionChanged()">
 
-    <map-marker
-            #markerElem="mapMarker"
-            *ngFor="let marker of markers"
-            [position]="marker.position"
-            [label]="marker.label"
-            [title]="marker.title"
-            [options]="marker.options"
-            (mapClick)="openInfo(markerElem, marker)">
-    </map-marker>
+        <map-marker
+                #markerElem="mapMarker"
+                *ngFor="let marker of markers"
+                [position]="marker.position"
+                [label]="marker.label"
+                [title]="marker.title"
+                [options]="marker.options"
+                (mapClick)="openInfo(markerElem, marker)">
+        </map-marker>
 
-    <map-info-window class="map-object" #infoWindow="mapInfoWindow" [routerLink]="['/user/page/' + objectInfo.id]">
-        <img class="map-object-img" src="{{objectInfo.preview}}">
-        <div class="map-object-info">
-            <h3 class="map-object-info-title">{{objectInfo.title}}</h3>
-            <!-- <p class="object-info-description">{{objectInfo.description}} </p> -->
-            <p class="map-object-info-goal">Потрібно: <strong>{{objectInfo.goal}}</strong></p>
-            <a class="map-object-info-link" [routerLink]="['/user/page/' + objectInfo.id]">
-                <img src="../../../../assets/arrow.svg">
-            </a>
-        </div>
-    </map-info-window>
-</google-map>
+        <map-info-window class="map-object" #infoWindow="mapInfoWindow" [routerLink]="['/user/page/' + objectInfo.id]">
+            <img class="map-object-img" src="{{objectInfo.preview}}">
+            <div class="map-object-info">
+                <h3 class="map-object-info-title">{{objectInfo.title}}</h3>
+                <!-- <p class="object-info-description">{{objectInfo.description}} </p> -->
+                <p class="map-object-info-goal">Потрібно: <strong>{{objectInfo.goal}}</strong></p>
+                <a class="map-object-info-link" [routerLink]="['/user/page/' + objectInfo.id]">
+                    <img src="../../../../assets/arrow.svg">
+                </a>
+            </div>
+        </map-info-window>
+    </google-map>
 
-<div class="map-buttons-zoom">
-    <button mat-flat-button  aria-label="Zoom in" (click)="zoomIn()">
-        <mat-icon>zoom_in</mat-icon>
-    </button>
-    <button mat-flat-button  aria-label="Zoom out" (click)="zoomOut()">
-        <mat-icon>zoom_out</mat-icon>
-    </button>
-</div>
+    <!-- Buttons -->
+    <div class="map-buttons-zoom">
+        <button mat-flat-button  aria-label="Zoom in" (click)="zoomIn()">
+            <mat-icon>zoom_in</mat-icon>
+        </button>
+        <button mat-flat-button  aria-label="Zoom out" (click)="zoomOut()">
+            <mat-icon>zoom_out</mat-icon>
+        </button>
+    </div>
 
-<div class="map-buttons-arrows">
-    <button mat-flat-button  aria-label="Zoom in" (click)="prev()">
-        <mat-icon>arrow_left</mat-icon>
-    </button>
-    <button mat-flat-button  aria-label="Zoom out" (click)="next()">
-        <mat-icon>arrow_right</mat-icon>
-    </button>
+    <div class="map-buttons-arrows">
+        <button mat-flat-button  aria-label="Zoom in" (click)="prev()">
+            <mat-icon>arrow_left</mat-icon>
+        </button>
+        <button mat-flat-button  aria-label="Zoom out" (click)="next()">
+            <mat-icon>arrow_right</mat-icon>
+        </button>
+    </div>
 </div>

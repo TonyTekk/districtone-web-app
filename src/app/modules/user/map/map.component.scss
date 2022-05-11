@@ -1,6 +1,12 @@
 @import '../../../../variables';
 
 .map {
+  height: calc(100% - 130px);
+
+  @include media-breakpoint-down(md) {
+    height: calc(100% - 80px);
+  }
+
   &-object {
     cursor: pointer;
   }
