@@ -21,11 +21,10 @@
             <img class="map-object-img" src="{{objectInfo.preview}}">
             <div class="map-object-info">
                 <h3 class="map-object-info-title">{{objectInfo.title}}</h3>
-                <!-- <p  >{{objectInfo.description}} </p> -->
+                <p class="object-info-description"> {{objectInfo.address}}</p>
                 <!--
                 <p class="map-object-info-goal">Потрібно: <strong>{{objectInfo.goal}}</strong></p>
                 -->
-                <p class="object-info-description"> {{objectInfo.address}}</p>
                 <a class="map-object-info-link" [routerLink]="['/user/page/' + objectInfo.id]">
                     <img src="../../../../assets/arrow.svg">
                 </a>

@@ -1,5 +1,5 @@
 // Angular
-import { Component, OnInit, ViewChild, ViewChildren, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps';
 import { Router } from '@angular/router';
 
@@ -29,6 +29,7 @@ const MAP_OPTIONS = {
 export class MapComponent implements OnInit {
     @ViewChild(GoogleMap, { static: false }) map: any;
     @ViewChild(MapInfoWindow, { static: false }) infoWindow: any;
+    @ViewChildren('markerElem') markerElemList: any;
 
     constructor(
         private router: Router,
@@ -45,6 +46,13 @@ export class MapComponent implements OnInit {
     public markers: MarkerModel[] = [];
     public objectInfo = new MarkersInfoModel({});
 
+    private getObjectIndex(id: string): number {
+        let index = 0;
+        this.markers.forEach((item, i) => item.id === id ? index = i : null);
+
+        return index;
+    }
+
     public ngOnInit() {
         this.markers = this.objectService.getObjects();
         // console.log('Markers: ', this.markers);
@@ -52,13 +60,14 @@ export class MapComponent implements OnInit {
     }
 
     public openInfo(markerMapObject: any, dataModel: any): void {
-        console.log('Marker', dataModel);
-        console.log('Marker info', markerMapObject);
+        //console.log('Marker', dataModel);
+        //console.log('Marker info', markerMapObject);
 
         this.infoWindow.close();
         this.infoWindow.open(markerMapObject);
         this.objectInfo = new MarkersInfoModel(dataModel);
         this.center = dataModel.position;
+        this.currentMarkerPosition = this.getObjectIndex(dataModel.id);
 
         // TODO add current marker visualisation
         // markerElem.marker.icon.url = './assets/check.svg';
@@ -66,23 +75,11 @@ export class MapComponent implements OnInit {
 
     public next(): void {
         this.currentMarkerPosition < this.markers.length - 1 ? this.currentMarkerPosition++ : this.currentMarkerPosition = 0;
-
-        //console.log(this.markerElem);
-        // TODO
-        //this.openInfo(this.markerElem, this.markers[this.currentMarkerPosition]);
-
-        //this.objectInfo = new MarkersInfoModel(this.markers[this.currentMarkerPosition]);
-        this.center = this.markers[this.currentMarkerPosition].position;
+        this.openInfo(this.markerElemList.toArray()[this.currentMarkerPosition], this.markers[this.currentMarkerPosition]);
     }
     public prev(): void {
         this.currentMarkerPosition > 0 ? this.currentMarkerPosition-- : this.currentMarkerPosition = this.markers.length - 1;
-
-        //console.log(this.markerElem);
-        // TODO
-        //this.openInfo(this.markerElem, this.markers[this.currentMarkerPosition]);
-
-        //this.objectInfo = new MarkersInfoModel(this.markers[this.currentMarkerPosition]);
-        this.center = this.markers[this.currentMarkerPosition].position;
+        this.openInfo(this.markerElemList.toArray()[this.currentMarkerPosition], this.markers[this.currentMarkerPosition]);
     }
 
     public zoomIn(): void {
